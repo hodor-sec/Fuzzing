@@ -2,7 +2,7 @@
 import sys, socket, struct, random, string, time
  
 if len(sys.argv) <= 2:
-    print "Usage: python " + sys.argv[0] + " [host] [port]"
+    print("Usage: python " + sys.argv[0] + " [host] [port]")
     exit()
 
 def random_string(str_size, allowed_chars):
@@ -17,17 +17,17 @@ increment = 100
 
 chars = string.ascii_letters + string.punctuation
 
-print "[+] Connecting to " + host + "\n"
+print("[+] Connecting to " + host + "\n")
 
 while True and (mess_size < maxlength):
     try:
         payload = random_string(mess_size,chars)
         
-        print "\n[+] Fuzzing string: "
+        print("\n[+] Fuzzing string: ")
         for char in payload:
             sys.stdout.write("\\x%x" % ord(char))
-        print '\n'
-        print "[+] Fuzzing with " + str(mess_size) + " length message..."
+        print('\n')
+        print("[+] Fuzzing with " + str(mess_size) + " length message...")
         
         req = (
                 payload
@@ -43,8 +43,8 @@ while True and (mess_size < maxlength):
         time.sleep(0.5)
     
         mess_size += increment
-    except Exception,e:
-        print "[!] Error occured: " + str(e)
-        print "[*] Crashed occured at buffer length: " + str(len(payload))
+    except Exception as e:
+        print("[!] Error occured: " + str(e))
+        print("[*] Crashed occured at buffer length: " + str(len(payload)))
         sys.exit()
 
